@@ -10,12 +10,10 @@
     <body>
         <div class="container">
             <h1>Shorten your URL :)</h1>
-            
           {!! Form::open(['url' => 'create']) !!}
-            {!! Form::url('url') !!}
+            {!! Form::text('url') !!}
             {!! Form::submit('Shorten') !!}
-          {!! Form::close() !!}
-            
+          {!! Form::close() !!}        
         </div>
     </body>
 </html>

@@ -1,14 +1,12 @@
-<?php
-
-namespace App;
+<?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Links extends Model {
+class Link extends Model {
 
-    protected $fillable = [
-        'url',
-        'hash'
-    ];
+	protected $fillable = [
+            'url',
+            'hash'
+        ];
 
 }
