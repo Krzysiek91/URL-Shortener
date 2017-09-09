@@ -1,4 +1,6 @@
 <?php
 
-Route::get('home', 'HomeController@test');
+Route::get('/', 'HomeController@test');
+
+Route::post('/create', 'LinkController@create');
 

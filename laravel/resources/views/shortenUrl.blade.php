@@ -8,14 +8,6 @@
         <title>URL_Shortener</title>
     </head>
     <body>
-        <div class="container">
-            <h1>Shorten your URL :)</h1>
-            
-          {!! Form::open(['url' => 'create']) !!}
-            {!! Form::url('url') !!}
-            {!! Form::submit('Shorten') !!}
-          {!! Form::close() !!}
-            
-        </div>
+        That works :)
     </body>
 </html>
