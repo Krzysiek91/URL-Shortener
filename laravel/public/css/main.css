@@ -11,11 +11,21 @@ body{
 
 h1{
     font-weight: 400;
+    font-style: italic;
+}
+
+.link{
+    padding: 30px 0 30px 0;
+    font-size: 1.2em;
 }
 
 input{
     padding: 10px;
     border: solid 5px #dcdcdc;
+}
+
+input:focus {
+    border-color:#888;
 }
 
 input[type="submit"]{

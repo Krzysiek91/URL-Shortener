@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Link;
 use App\Http\Controllers\Controller;
-//use Illuminate\Http\Request;
 use Request;
-use Symfony\Component\Console\Input\Input;
 use DB;
+use Redirect;
 
 class LinkController extends Controller {
 
@@ -21,9 +20,8 @@ class LinkController extends Controller {
                 $exists = Link::where('url', '=', $url);
 
                 if ($exists->count() >= 1) {
-                    echo 'This URL already has a shortener';
                     $hash = $exists->first()->hash;
-                    echo $hash;
+                    return redirect('/')->with('get', '<a href="' . [url('/get')][0] . '?h=' . $hash . '">' . [url('/get')][0] . '?h=' . $hash . '</a>');
                 } else {
                     $urlDB = Link::create(['url' => $url]);
                     $hash = base_convert($urlDB, 10, 36);
@@ -31,20 +29,20 @@ class LinkController extends Controller {
                             ->where('id', $urlDB->id)
                             ->update(['hash' => $hash]);
                 }
-                /*
-                  if ($urlDB) {
-                  $hash = $urlDB->id;
-                  echo $hash;
-                  }
-                 */
+                
+                if ($hash != null) {
+                    return redirect('/')->with('get', '<a href="' . [url('/get')][0] . '?h=' . $hash . '">' . [url('/get')][0] . '?h=' . $hash . '</a>');
+                }
             } else {
-                return 'Something went wrong';
+                return redirect('/')->with('error', 'You probaly did not enter corret URL');
             }
         }
     }
 
     public function get() {
-        //
+        if (isset($_GET['h'])) {
+            $link = DB::table('links')->where('hash', $_GET['h'])->first()->url;
+            return Redirect::to($link);
+        }
     }
-
 }
