@@ -24,12 +24,14 @@ class LinkController extends Controller {
                     return redirect('/')->with('get', '<a href="' . [url('/get')][0] . '?h=' . $hash . '">' . [url('/get')][0] . '?h=' . $hash . '</a>');
                 } else {
                     $urlDB = Link::create(['url' => $url]);
-                    $hash = base_convert($urlDB, 10, 36);
+                    $idDB = $urlDB->id;
+                    $hash = base_convert($idDB, 10, 36);
+
                     DB::table('links')
-                            ->where('id', $urlDB->id)
+                            ->where('id', $idDB)
                             ->update(['hash' => $hash]);
                 }
-                
+
                 if ($hash != null) {
                     return redirect('/')->with('get', '<a href="' . [url('/get')][0] . '?h=' . $hash . '">' . [url('/get')][0] . '?h=' . $hash . '</a>');
                 }
