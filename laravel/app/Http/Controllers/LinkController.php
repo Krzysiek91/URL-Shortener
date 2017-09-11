@@ -12,10 +12,10 @@ class LinkController extends Controller {
 
     public function create(Request $request) {
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['url']) === true && filter_var($_POST['url'], FILTER_VALIDATE_URL)) {
+        if (Request::isMethod('post')) {
+            $url = Request::input('url');
+            if (isset($url) === true && filter_var($url, FILTER_VALIDATE_URL)) {
 
-                $url = $_POST['url'];
                 $hash = null;
                 $exists = Link::where('url', '=', $url);
 
@@ -45,6 +45,9 @@ class LinkController extends Controller {
         if (isset($_GET['h'])) {
             $link = DB::table('links')->where('hash', $_GET['h'])->first()->url;
             return Redirect::to($link);
+        } else {
+            return redirect('/')->with('error', 'Something went wrong, try again');
         }
     }
+
 }
